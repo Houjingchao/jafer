@@ -1,4 +1,7 @@
 package jafer
+
+import "strings"
+
 // create by houjingchao on 17/08/09
 
 type tag struct {
@@ -7,4 +10,28 @@ type tag struct {
 	name   string
 	path   string
 	prefix string
+}
+
+//根据tag 生成 tag struct
+func parseTag(tag string) *tag{
+	t:=&tag{}
+
+	if tag == "auto" {
+		t.depend=true
+		t.auto =true
+		return t
+	}
+
+	if len(tag)<1 {
+		panic("tag length <1 ")
+		return t
+	}
+
+	if strings.Contains(tag, ".") {
+		return t
+	}
+
+	t.depend = true
+	t.name = tag
+	return t
 }
